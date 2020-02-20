@@ -13,7 +13,7 @@ interface IHeroCardProps {
 }
 
 const HeroCardDiv = styled.div`
-  padding: 2em;
+  padding: 15px;
   max-width: 400px;
 `;
 
@@ -33,24 +33,22 @@ const LinkToHeroPage = styled(Link)`
   font-weight: 800;
 `;
 
+export const attributeEmojis = {
+  strength: "💪",
+  intelligence: "🧠",
+  agility: "🤸",
+  speed: "🏃",
+  stamina: "🧘"
+};
 export const HeroCard: React.FC<IHeroCardProps> = ({
   name,
   imgUrl,
   description,
   attributes
 }) => {
-  console.log(attributes);
-  const attributeEmojis = {
-    strength: "💪",
-    intelligence: "🧠",
-    agility: "🤸",
-    speed: "🏃",
-    stamina: "🧘"
-  };
-
   const getHighestAttributeEmoji = () => {
     let attributesWithoutTypename = { ...attributes };
-    delete attributesWithoutTypename.__typename;
+    delete attributesWithoutTypename["__typename"];
     const highest: string = Object.keys(
       attributesWithoutTypename
     ).reduce((a, b) =>
@@ -70,7 +68,7 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
       </HeroHeading>
       <HeroImg src={imgUrl}></HeroImg>
       <Paragraph>{firstSentenceFromDescription}...</Paragraph>
-      <LinkToHeroPage to={`/heros/${name}`}>{"Show more"}</LinkToHeroPage>
+      <LinkToHeroPage to={`/heroes/${name}`}>{"Show more"}</LinkToHeroPage>
     </HeroCardDiv>
   );
 };

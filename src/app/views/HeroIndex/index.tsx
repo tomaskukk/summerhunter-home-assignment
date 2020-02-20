@@ -2,11 +2,10 @@ import * as React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { TopBar } from "../../components/TopBar";
 import { Hero } from "../../components/Hero";
-import { Section } from "../../components/Section";
 import { Footer } from "../../components/Footer";
 import { HeroCard } from "../../components/HeroCard";
 import { Heropage } from "../../components/Heropage";
@@ -40,9 +39,7 @@ const HEROES_QUERY = gql`
   }
 `;
 
-// interface IHeroIndexProps {
-
-// }
+interface IHeroIndexProps {}
 
 interface IHero {
   name: string;
@@ -70,14 +67,19 @@ const HeroCardContainer = styled.div`
   }
 `;
 
-// display: flex;
-//   padding: 50px;
-//   align-self: center;
-//   max-width: 1150px;
-//   @media (min-width: 1400px) {
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
+const HeroPageContainer = styled.div`
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  text-align: center;
+  @media (min-width: 1400px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
 
 const handleLoading = () => <div>Loading...</div>;
 
@@ -98,43 +100,36 @@ export const HeroIndex: React.FC<IHero> = () => {
     return handleLoading();
   }
 
-  console.log(heroes);
-
   const heroByName = name => {
-    console.log(
-      name,
-      heroes.map(hero => hero.name)
-    );
     return heroes.find(hero => hero.name === name);
   };
 
   return (
-    <Router>
-      <main>
-        <TopBar />
-        <Hero />
+    <main>
+      <TopBar />
 
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <HeroCardContainer>
+            {heroes.map(hero => (
+              <HeroCard key={hero.name} {...hero} />
+            ))}
+          </HeroCardContainer>
+        )}
+      />
+      <HeroPageContainer>
         <Route
           exact
-          path="/"
-          render={() => (
-            <HeroCardContainer>
-              {heroes.map(hero => (
-                <HeroCard key={hero.name} {...hero} />
-              ))}
-            </HeroCardContainer>
-          )}
-        />
-
-        <Route
-          exact
-          path="/heros/:name"
+          path="/heroes/:name"
           render={({ match }) => (
             <Heropage {...heroByName(match.params.name)} />
           )}
         />
-        <Footer />
-      </main>
-    </Router>
+        {/* <Heropage {...heroByName("Porcu")} /> */}
+      </HeroPageContainer>
+      <Footer />
+    </main>
   );
 };

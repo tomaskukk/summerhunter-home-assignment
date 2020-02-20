@@ -13,7 +13,6 @@ export class HeroResolver {
   @Query(returns => [Hero])
   heroes(): Promise<Hero[]> {
     const heroRepository = this.heroRepository.find();
-    console.log(heroRepository);
     return heroRepository;
   }
 }
