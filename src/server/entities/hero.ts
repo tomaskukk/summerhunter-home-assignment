@@ -12,6 +12,7 @@ import {
 import { ObjectType, ID, Field } from "type-graphql";
 import { Lazy } from "../helpers";
 import { Skill } from "../entities/skill";
+import { TElement } from "../types/element";
 
 @Entity()
 @ObjectType()
@@ -35,6 +36,14 @@ export class Hero {
   @Field()
   @Column()
   backStory: string;
+
+  @Field()
+  @Column()
+  resistance: TElement;
+
+  @Field()
+  @Column()
+  weakness: TElement;
 
   @Field(type => [Skill])
   @ManyToMany(type => Skill, { lazy: true, cascade: ["insert"] })

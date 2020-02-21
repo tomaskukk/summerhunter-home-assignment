@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { HeadingOne, Paragraph } from "../Typography";
+import { Paragraph } from "../Typography";
 import { attributeEmojis } from "../HeroCard";
 
 interface IProgressBarProps {
@@ -15,9 +15,12 @@ interface IProps {
 const ProgressBarRoot = styled.div`
   position: relative;
   height: 20px;
-  width: 150px;
-  border-radius: 40px;
-  border: 3px solid #333;
+  width: 200px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px groove white;
+  border-radius: 5px;
+  margin: 0 auto;
 `;
 
 const Filler = styled.div`
@@ -29,10 +32,17 @@ const Filler = styled.div`
 `;
 
 const ProgressBarTitle = styled(Paragraph)`
-  color: white;
   margin: 0px;
   padding 0px;
+  color: white;
+  text-align:center;
+  text-transform: uppercase;
+  font-size: 20px;
+`;
 
+const TitleSpan = styled.span`
+  padding: 5px;
+  border-radius: 15px;
 `;
 
 export const ProgressBar: React.FC<IProgressBarProps> = ({
@@ -42,8 +52,11 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
   return (
     <>
       <ProgressBarTitle>
-        {attribute} {attributeEmojis[attribute]}
+        <TitleSpan>
+          {attribute} {attributeEmojis[attribute]}
+        </TitleSpan>
       </ProgressBarTitle>
+
       <ProgressBarRoot>
         <Filler width={width}></Filler>
       </ProgressBarRoot>

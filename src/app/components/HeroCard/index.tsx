@@ -3,13 +3,14 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Paragraph, HeadingTwo } from "../../components/Typography";
-import { Route, Link, Redirect, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { IAttributes } from "../Heropage";
 
 interface IHeroCardProps {
   name: string;
   description: string;
   imgUrl: string;
-  attributes: object;
+  attributes: IAttributes;
 }
 
 const HeroCardDiv = styled.div`
@@ -21,6 +22,14 @@ const HeroImg = styled.img`
   max-width: 100%;
   max-height: 400px;
   border-radius: 4px;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
+  :hover {
+    -webkit-transform: scale(0.97);
+    transform: scale(0.97);
+  }
 `;
 
 const HeroHeading = styled(HeadingTwo)`

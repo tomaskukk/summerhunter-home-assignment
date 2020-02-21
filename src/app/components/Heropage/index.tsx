@@ -2,92 +2,144 @@
 
 import * as React from "react";
 import styled from "styled-components";
-import { HeadingOne, Paragraph } from "../Typography";
+import { HeadingOne, Paragraph, HeadingTwo } from "../Typography";
 import { ProgressBar } from "./progressbar";
+import { HeroSkill } from "./heroskills";
+import { Attributes } from "./attributes";
+import { HeroStory } from "./herostory";
 
 interface IHeroPageProps {
   name: string;
   description: string;
   imgUrl: string;
+  backStory: string;
+  resistance: string;
+  weakness: string;
+  attributes: IAttributes;
+  lifepowers: ILifepowers;
+  skills: [ISkills];
+}
+
+export interface IAttributes {
+  agility: number;
+  intelligence: number;
+  speed: number;
+  stamina: number;
+  strength: number;
+}
+
+export interface ILifepowers {
+  healthpoints: number;
+  mana: number;
+}
+
+export interface ISkills {
+  name: string;
+  damage: number;
+  element: string;
 }
 
 interface IProps {
   imgUrl: string;
 }
 
-const HeroPageRootImg = styled.div`
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.95),
-      rgba(0, 0, 0, 0.95)
-    ),
-    url(${(props: IProps) => props.imgUrl});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  z-index: 0;
-  width: 100%;
-`;
-
-const Image = styled.div`
+const HeroPageRoot = styled.div`
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.9)
     ),
-    linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
-    linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+    linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+    linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)),
     url(${(props: IProps) => props.imgUrl});
-  min-height: 750px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  width: 100%;
+`;
+
+const Image = styled.div`
+  background-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.85)
+    ),
+    linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85)),
+    url(${(props: IProps) => props.imgUrl});
+  min-height: 1000px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   margin-bottom: 100px auto;
   z-index: 0;
-  min-width: 1000px;
-  width: 80%;
+  width: 65%;
   margin: 0 auto;
   @media (max-width: 768px) {
-    max-height: 500px;
     min-height: 500px;
     width: 100%;
   }
 `;
 
 const HeroNameHeading = styled(HeadingOne)`
-  color: white;
-  bottom: 0;
-  position: absolute;
+  font-style: italic;
+  text-transform: uppercase;
   width: 100%;
-  left: 0px;
+  color: white;
+  text-align: center;
 `;
 
-const BasicInformationDiv = styled.div`
-  border: 2px white;
-  display: inline-block;
-  color: white;
+const HeroContentContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
-  console.table(props);
+  console.log(props);
 
   return (
-    <HeroPageRootImg imgUrl={props.imgUrl}>
+    <HeroPageRoot imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
         <HeroNameHeading>{props.name}</HeroNameHeading>
+
+        <HeroContentContainer>
+          <Attributes attributes={props.attributes} />
+
+          <HeroStory
+            description={props.description}
+            backStory={props.backStory}
+          />
+
+          {/* <AttributesDiv>
+            <BasicInformationDiv>
+              {"Resistance: "} {props.resistance}
+            </BasicInformationDiv>
+
+            <BasicInformationDiv>
+              {"Weakness: "} {props.weakness}
+            </BasicInformationDiv>
+
+            <BasicInformationDiv>
+              {"Health"} {props.lifepowers.healthpoints}
+            </BasicInformationDiv>
+            <BasicInformationDiv>
+              {"Mana"} {props.lifepowers.mana}
+            </BasicInformationDiv>
+          </AttributesDiv> */}
+          {props.skills.map(skill => (
+            <HeroSkill key={skill.name} {...skill} />
+          ))}
+        </HeroContentContainer>
       </Image>
-      <BasicInformationDiv>
-        {["strength", "agility", "stamina", "speed", "intelligence"].map(
-          attribute => (
-            <ProgressBar
-              attribute={attribute}
-              width={props.attributes[attribute]}
-            ></ProgressBar>
-          )
-        )}
-      </BasicInformationDiv>
-    </HeroPageRootImg>
+    </HeroPageRoot>
   );
 };

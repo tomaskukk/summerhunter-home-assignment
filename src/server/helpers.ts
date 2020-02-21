@@ -14,7 +14,8 @@ const PORCU = {
     Porcu barely managed to get away, but he wasn't able to save his fiancé. Next day he went back to the Reefs to recover his suit from his hideout. \n
     When he saw the destruction he vowed to have his revenge on his loved one and replenish world from evil.
   `,
-
+  resistance: "Fire" as TElement,
+  weakness: "Water" as TElement,
   attributes: {
     strength: 80,
     intelligence: 60,
@@ -25,9 +26,7 @@ const PORCU = {
   },
   lifepowers: {
     healthpoints: 800,
-    mana: 0,
-    resistance: "Fire" as TElement,
-    weakness: "Water" as TElement
+    mana: 0
   },
   skills: [
     {
@@ -55,6 +54,8 @@ const LISA = {
   backStory: `
     Coming from a wealthy family of McAllisters, Lisa had a joyful childhood. Though as the day went by at the helping her family with upkeeping the farm and raking leaves she found herself quite bored. She said that to her father. Being a huntsman and the head of the family, Joe McAllister decided to teach his daughter to shoot with a revolver. After that there was no coming back.
   `,
+  resistance: "Air" as TElement,
+  weakness: "Fire" as TElement,
 
   attributes: {
     strength: 20,
@@ -65,10 +66,7 @@ const LISA = {
   },
   lifepowers: {
     healthpoints: 500,
-    mana: 0,
-
-    resistance: "Air" as TElement,
-    weakness: "Fire" as TElement
+    mana: 0
   },
   skills: [
     {
@@ -103,7 +101,8 @@ const GIDEON = {
   backStory: `
     Gideon had always been bit of an oddball. He first noticed his psychic skills when he rescued a tiny kitten from getting squashed by a card. Little did he know of his future before awakening his powers, but at that point it seemed clear to him what he had to do. Couple years after the incident he joined the Hunters.
  `,
-
+  resistance: "Air" as TElement,
+  weakness: "Fire" as TElement,
   attributes: {
     strength: 1,
     intelligence: 99,
@@ -113,10 +112,7 @@ const GIDEON = {
   },
   lifepowers: {
     healthpoints: 300,
-    mana: 20000,
-
-    resistance: "Air" as TElement,
-    weakness: "Fire" as TElement
+    mana: 20000
   },
   skills: [
     {

@@ -2,13 +2,14 @@ import * as React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { TopBar } from "../../components/TopBar";
 import { Hero } from "../../components/Hero";
 import { Footer } from "../../components/Footer";
 import { HeroCard } from "../../components/HeroCard";
 import { Heropage } from "../../components/Heropage";
+import { IAttributes, ILifepowers, ISkills } from "../../components/Heropage";
 
 const HEROES_QUERY = gql`
   query {
@@ -17,6 +18,8 @@ const HEROES_QUERY = gql`
       imgUrl
       description
       backStory
+      resistance
+      weakness
       attributes {
         strength
         intelligence
@@ -25,8 +28,6 @@ const HEROES_QUERY = gql`
         speed
       }
       lifepowers {
-        resistance
-        weakness
         healthpoints
         mana
       }
@@ -45,7 +46,14 @@ interface IHero {
   name: string;
   imgUrl: string;
   description: string;
-  attributes: object;
+  backStory: string;
+  healthpoints: number;
+  mana: number;
+  resistance: string;
+  weakness: string;
+  attributes: IAttributes;
+  lifepowers: ILifepowers;
+  skills: [ISkills];
 }
 
 const HeroCardContainer = styled.div`
@@ -74,11 +82,14 @@ const HeroPageContainer = styled.div`
   justify-content: center;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   @media (min-width: 1400px) {
     margin-left: auto;
     margin-right: auto;
   }
+  color: white;
 `;
 
 const handleLoading = () => <div>Loading...</div>;
@@ -107,9 +118,9 @@ export const HeroIndex: React.FC<IHero> = () => {
   return (
     <main>
       <TopBar />
+      <Hero />
 
       <Route
-        exact
         path="/"
         render={() => (
           <HeroCardContainer>
@@ -127,7 +138,9 @@ export const HeroIndex: React.FC<IHero> = () => {
             <Heropage {...heroByName(match.params.name)} />
           )}
         />
-        {/* <Heropage {...heroByName("Porcu")} /> */}
+        {/* <Heropage {...heroByName("Gideon")} />
+        <Heropage {...heroByName("Porcu")} />
+        <Heropage {...heroByName("Lisa McAllister")} /> */}
       </HeroPageContainer>
       <Footer />
     </main>
