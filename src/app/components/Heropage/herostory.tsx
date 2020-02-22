@@ -14,9 +14,10 @@ const HeroStoryContainer = styled(Paragraph)`
   text-align: left;
   color: white;
   background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   padding: 15px;
   border-radius: 15px;
+  margin: 5px;
   border: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
@@ -24,6 +25,7 @@ const ShowMoreButton = styled.button`
   background: none;
   border: none;
   padding: 0px;
+  color: moccasin;
 `;
 
 export const HeroStory: React.FC<IHerostoryProps> = ({
