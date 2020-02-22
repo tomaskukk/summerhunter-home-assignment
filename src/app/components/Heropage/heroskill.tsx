@@ -14,6 +14,7 @@ const SkillContent = styled.div`
 `;
 
 const SkillItem = styled(Paragraph)`
+  font-size: 20px;
   display: block;
   color: white;
 `;
@@ -29,7 +30,6 @@ export const HeroSkill: React.FC<IHeroSkillsProps> = ({
 }) => {
   return (
     <SkillContent>
-      <SkillTitle>{name}</SkillTitle>
       <SkillItem>
         {"Damage: "} {damage}
       </SkillItem>

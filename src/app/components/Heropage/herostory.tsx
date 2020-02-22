@@ -10,7 +10,7 @@ interface IHerostoryProps {
 }
 
 const HeroStoryContainer = styled(Paragraph)`
-  width: 50%;
+  width: 60%;
   text-align: left;
   color: white;
   background: rgb(0, 0, 0);

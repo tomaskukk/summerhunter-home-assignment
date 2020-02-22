@@ -121,6 +121,7 @@ export const HeroIndex: React.FC<IHero> = () => {
       <Hero />
 
       <Route
+        exact
         path="/"
         render={() => (
           <HeroCardContainer>
@@ -131,16 +132,16 @@ export const HeroIndex: React.FC<IHero> = () => {
         )}
       />
       <HeroPageContainer>
-        <Route
+        {/* <Route
           exact
           path="/heroes/:name"
           render={({ match }) => (
             <Heropage {...heroByName(match.params.name)} />
           )}
-        />
-        {/* <Heropage {...heroByName("Gideon")} />
+        /> */}
+        <Heropage {...heroByName("Gideon")} />
         <Heropage {...heroByName("Porcu")} />
-        <Heropage {...heroByName("Lisa McAllister")} /> */}
+        <Heropage {...heroByName("Lisa McAllister")} />
       </HeroPageContainer>
       <Footer />
     </main>

@@ -51,7 +51,7 @@ const AnimLogo = styled.img`
   top: 18%;
   margin-top: -50px;
   z-index: 1;
-  animation: ${rotate} 1s infinite linear;
+  animation: ${rotate} ${"1s infinite linear"};
 `;
 
 export const Hero = () => {

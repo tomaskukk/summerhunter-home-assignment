@@ -4,7 +4,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { HeadingOne, Paragraph, HeadingTwo, HeadingThree } from "../Typography";
 import { ProgressBar } from "./progressbar";
-import { HeroSkill } from "./heroskills";
+import { HeroSkill } from "./heroskill";
 import { Attributes } from "./attributes";
 import { HeroStory } from "./herostory";
 
@@ -93,6 +93,8 @@ const HeroNameHeading = styled(HeadingOne)`
   width: 100%;
   color: white;
   text-align: center;
+  margin: 0px;
+  padding: 0px;
 `;
 
 const SkillHeading = styled(HeadingTwo)`
@@ -104,11 +106,11 @@ const SkillHeading = styled(HeadingTwo)`
 const HeroContentContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 40px;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  -webkit-justify-content: space-evenly;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 `;
@@ -117,55 +119,84 @@ const HeroSkillContainer = styled.div`
   margin: 30px;
   padding: 10px;
   min-width: 400px;
-  display: inline-block;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  text-align: center;
+  display: flex;
+  text-align: left;
+  width: 45%;
 `;
 
-const ShowSkill = styled.button`
-  width: 150px;
+const SkillButtonContainer = styled.div`
+  display: inline-block;
+`;
+
+const ShowSkill = styled.a`
+font-family: "Montserrat";
+
+color: #001147
+  transition: all 0.3s ease 0s;
   display: block;
-  margin: 10px auto;
+  width: 150px;
+  margin: 10px;
   padding: 20px;
   border-radius: 300px;
   border: none;
   background-color: ${(props: IButtonProps) => props.backgroundColor};
+  :hover {
+color: #404040 ;
+font-weight: 500 ;
+letter-spacing: .3px;
+background: pink;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.3s ease 0s;
+}
+`;
+
+const LifePowerItem = styled(Paragraph)`
+  color: white;
+  text-align: center;
+  margin-top: -25px;
+  font-size: 15px;
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
   const [skillName, setSkillName] = React.useState("");
 
-  React.useEffect(() => setSkillName(props.skills[0].name));
+  React.useEffect(() => setSkillName(props.skills[0].name), [props.skills]);
   console.log(props);
 
   return (
     <HeroPageRoot imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
         <HeroNameHeading>{props.name}</HeroNameHeading>
-
+        <LifePowerItem>
+          {"Resistance: "} {props.resistance}
+        </LifePowerItem>
+        <LifePowerItem>
+          {"Weakness: "} {props.weakness}
+        </LifePowerItem>{" "}
         <HeroContentContainer>
           <Attributes attributes={props.attributes} />
           <HeroStory
             description={props.description}
             backStory={props.backStory}
           />
+          <SkillHeading>{"Skills"}</SkillHeading>
           <HeroSkillContainer>
-            <SkillHeading>{"Skills"}</SkillHeading>
-            {props.skills.map((skill, i) => (
-              <ShowSkill
-                backgroundColor={skill.name === skillName ? "pink" : "white"}
-                onClick={() => setSkillName(skill.name)}
-              >
-                {skill.name}
-              </ShowSkill>
-            ))}
+            <SkillButtonContainer>
+              {props.skills.map((skill, i) => (
+                <ShowSkill
+                  backgroundColor={skill.name === skillName ? "pink" : "white"}
+                  onClick={() => setSkillName(skill.name)}
+                >
+                  {skill.name}
+                </ShowSkill>
+              ))}
+            </SkillButtonContainer>
             <HeroSkill
               {...props.skills.find(skill => skill.name === skillName)}
             ></HeroSkill>
           </HeroSkillContainer>
+          <div></div>
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

@@ -9,10 +9,9 @@ interface IAttributesProps {
 }
 
 const AttributesDiv = styled.div`
-  width: 40%;
+  width: 30%;
   color: white;
   min-width: 250px;
-  margin: 10px;
 `;
 
 export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {

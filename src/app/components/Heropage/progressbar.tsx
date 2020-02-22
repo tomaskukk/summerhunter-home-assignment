@@ -8,7 +8,7 @@ interface IProgressBarProps {
   attribute: string;
 }
 
-interface IProps {
+interface IFillerProps {
   width: number;
 }
 
@@ -29,7 +29,7 @@ const Filler = styled.div`
   background: #f9f9f9;
   border-radius: inherit;
   transition: width 0.2s ease-in;
-  width: ${(props: IProps) => props.width}%;
+  width: ${(props: IFillerProps) => props.width}%;
 `;
 
 const ProgressBarTitle = styled(Paragraph)`
