@@ -12,6 +12,7 @@ const AttributesDiv = styled.div`
   width: 40%;
   color: white;
   min-width: 250px;
+  margin: 10px;
 `;
 
 export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {

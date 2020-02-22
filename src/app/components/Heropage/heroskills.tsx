@@ -10,7 +10,7 @@ interface IHeroSkillsProps {
 
 const SkillContent = styled.div`
   display: block;
-  margin: 10px;
+  width: 100%;
 `;
 
 const SkillItem = styled(Paragraph)`

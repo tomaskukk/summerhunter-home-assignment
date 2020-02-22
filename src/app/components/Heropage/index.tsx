@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import styled from "styled-components";
-import { HeadingOne, Paragraph, HeadingTwo } from "../Typography";
+import { HeadingOne, Paragraph, HeadingTwo, HeadingThree } from "../Typography";
 import { ProgressBar } from "./progressbar";
 import { HeroSkill } from "./heroskills";
 import { Attributes } from "./attributes";
@@ -41,6 +41,10 @@ export interface ISkills {
 
 interface IProps {
   imgUrl: string;
+}
+
+interface IButtonProps {
+  backgroundColor: string;
 }
 
 const HeroPageRoot = styled.div`
@@ -91,6 +95,12 @@ const HeroNameHeading = styled(HeadingOne)`
   text-align: center;
 `;
 
+const SkillHeading = styled(HeadingTwo)`
+  color: white;
+  width: 100%;
+  margin-top: 25px;
+`;
+
 const HeroContentContainer = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -103,7 +113,32 @@ const HeroContentContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const HeroSkillContainer = styled.div`
+  margin: 30px;
+  padding: 10px;
+  min-width: 400px;
+  display: inline-block;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+`;
+
+const ShowSkill = styled.button`
+  width: 150px;
+  display: block;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 300px;
+  border: none;
+  background-color: ${(props: IButtonProps) => props.backgroundColor};
+`;
+
 export const Heropage: React.FC<IHeroPageProps> = props => {
+  const [skillName, setSkillName] = React.useState("");
+
+  React.useEffect(() => setSkillName(props.skills[0].name));
   console.log(props);
 
   return (
@@ -113,31 +148,24 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
 
         <HeroContentContainer>
           <Attributes attributes={props.attributes} />
-
           <HeroStory
             description={props.description}
             backStory={props.backStory}
           />
-
-          {/* <AttributesDiv>
-            <BasicInformationDiv>
-              {"Resistance: "} {props.resistance}
-            </BasicInformationDiv>
-
-            <BasicInformationDiv>
-              {"Weakness: "} {props.weakness}
-            </BasicInformationDiv>
-
-            <BasicInformationDiv>
-              {"Health"} {props.lifepowers.healthpoints}
-            </BasicInformationDiv>
-            <BasicInformationDiv>
-              {"Mana"} {props.lifepowers.mana}
-            </BasicInformationDiv>
-          </AttributesDiv> */}
-          {props.skills.map(skill => (
-            <HeroSkill key={skill.name} {...skill} />
-          ))}
+          <HeroSkillContainer>
+            <SkillHeading>{"Skills"}</SkillHeading>
+            {props.skills.map((skill, i) => (
+              <ShowSkill
+                backgroundColor={skill.name === skillName ? "pink" : "white"}
+                onClick={() => setSkillName(skill.name)}
+              >
+                {skill.name}
+              </ShowSkill>
+            ))}
+            <HeroSkill
+              {...props.skills.find(skill => skill.name === skillName)}
+            ></HeroSkill>
+          </HeroSkillContainer>
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

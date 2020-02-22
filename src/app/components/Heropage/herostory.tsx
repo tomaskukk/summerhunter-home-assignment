@@ -35,7 +35,6 @@ export const HeroStory: React.FC<IHerostoryProps> = ({
   return (
     <HeroStoryContainer>
       {description}
-      <br></br>
       {showBackStory ? backStory : null}
       <ShowMoreButton onClick={() => setShowBackStory(!showBackStory)}>
         {showBackStory ? "Show less" : "Show more"}

@@ -21,6 +21,7 @@ const ProgressBarRoot = styled.div`
   border: 1px groove white;
   border-radius: 5px;
   margin: 0 auto;
+  margin-bottom: 10px;
 `;
 
 const Filler = styled.div`
