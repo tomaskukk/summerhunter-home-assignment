@@ -2,16 +2,18 @@ import * as React from "react";
 import styled from "styled-components";
 import { IAttributes } from "./index";
 import { ProgressBar } from "./progressbar";
-import { Paragraph } from "../Typography";
+import { Paragraph, HeadingTwo } from "../Typography";
 
 interface IAttributesProps {
   attributes: IAttributes;
 }
 
 const AttributesDiv = styled.div`
-  width: 30%;
   color: white;
-  min-width: 250px;
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {

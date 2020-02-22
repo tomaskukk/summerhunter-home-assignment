@@ -48,39 +48,19 @@ interface IButtonProps {
 }
 
 const HeroPageRoot = styled.div`
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.9)
-    ),
-    linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
-    linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
-    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)),
-    url(${(props: IProps) => props.imgUrl});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: grey;
   position: relative;
   width: 100%;
 `;
 
 const Image = styled.div`
-  background-image: linear-gradient(
-      to left,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.85)
-    ),
-    linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85)),
-    url(${(props: IProps) => props.imgUrl});
-  min-height: 1000px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+  background-color: #57595d;
+  min-height: 800px;
+  border-radius: 10px;
   margin-bottom: 100px auto;
   z-index: 0;
-  width: 65%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 50px auto;
   @media (max-width: 768px) {
     min-height: 500px;
     width: 100%;
@@ -93,8 +73,8 @@ const HeroNameHeading = styled(HeadingOne)`
   width: 100%;
   color: white;
   text-align: center;
-  margin: 0px;
-  padding: 0px;
+  margin-top: 0px;
+  padding-top: 35px;
 `;
 
 const SkillHeading = styled(HeadingTwo)`
@@ -107,21 +87,18 @@ const HeroContentContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   padding-top: 40px;
-  display: -webkit-flex;
   display: flex;
   justify-content: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  align-items: flex-start;
 `;
 
 const HeroSkillContainer = styled.div`
   margin: 30px;
   padding: 10px;
-  min-width: 400px;
   display: flex;
   text-align: left;
-  width: 45%;
+  min-width: 45%;
 `;
 
 const SkillButtonContainer = styled.div`
@@ -154,8 +131,20 @@ transition: all 0.3s ease 0s;
 const LifePowerItem = styled(Paragraph)`
   color: white;
   text-align: center;
-  margin-top: -25px;
+  margin-top: -10px;
   font-size: 15px;
+`;
+
+const HeroImage = styled.img`
+  margin: 0 auto;
+  text-align: center;
+  max-width: 250px;
+  max-height: 250px;
+`;
+
+const HeroImageDiv = styled.div`
+  margin: 0 auto;
+  text-align: center;
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
@@ -168,19 +157,24 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
     <HeroPageRoot imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
         <HeroNameHeading>{props.name}</HeroNameHeading>
+        <HeroImageDiv>
+          <HeroImage src={props.imgUrl}></HeroImage>
+        </HeroImageDiv>
         <LifePowerItem>
           {"Resistance: "} {props.resistance}
         </LifePowerItem>
         <LifePowerItem>
           {"Weakness: "} {props.weakness}
         </LifePowerItem>{" "}
+        <HeadingTwo>Overview</HeadingTwo>
         <HeroContentContainer>
           <Attributes attributes={props.attributes} />
           <HeroStory
             description={props.description}
             backStory={props.backStory}
           />
-          <SkillHeading>{"Skills"}</SkillHeading>
+          {/*              <SkillHeading>{"Skills"}</SkillHeading>
+          {" "}
           <HeroSkillContainer>
             <SkillButtonContainer>
               {props.skills.map((skill, i) => (
@@ -195,8 +189,7 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
             <HeroSkill
               {...props.skills.find(skill => skill.name === skillName)}
             ></HeroSkill>
-          </HeroSkillContainer>
-          <div></div>
+          </HeroSkillContainer> */}
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

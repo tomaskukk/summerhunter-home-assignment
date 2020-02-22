@@ -12,10 +12,15 @@ interface IFillerProps {
   width: number;
 }
 
+const ProgressContainer = styled.div`
+  padding: 10px;
+  display: block;
+`;
+
 const ProgressBarRoot = styled.div`
   position: relative;
   height: 20px;
-  width: 200px;
+  width: 150px;
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.7);
   border: 1px groove white;
@@ -38,7 +43,7 @@ const ProgressBarTitle = styled(Paragraph)`
   color: white;
   text-align:center;
   text-transform: uppercase;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 const TitleSpan = styled.span`
@@ -51,7 +56,7 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
   width
 }) => {
   return (
-    <>
+    <ProgressContainer>
       <ProgressBarTitle>
         <TitleSpan>
           {attribute} {attributeEmojis[attribute]}
@@ -61,6 +66,6 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
       <ProgressBarRoot>
         <Filler width={width}></Filler>
       </ProgressBarRoot>
-    </>
+    </ProgressContainer>
   );
 };

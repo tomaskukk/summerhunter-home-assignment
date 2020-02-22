@@ -10,14 +10,12 @@ interface IHerostoryProps {
 }
 
 const HeroStoryContainer = styled(Paragraph)`
-  width: 60%;
   text-align: left;
   color: white;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.7);
+
   padding: 15px;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+
+  max-width: 50%;
 `;
 
 const ShowMoreButton = styled.button`
