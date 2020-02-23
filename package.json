@@ -23,6 +23,7 @@
     "graphql-tag": "^2.10.1",
     "react-apollo-hooks": "^0.4.3",
     "react-router-dom": "^5.1.2",
+    "react-tooltip": "^4.0.3",
     "type-graphql": "^0.17.0",
     "typedi": "^0.8.0",
     "typeorm": "0.2.15",

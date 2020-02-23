@@ -12,6 +12,7 @@ const AttributesDiv = styled.div`
   width: 30%;
   color: white;
   min-width: 250px;
+  display: block;
 `;
 
 export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {
@@ -23,7 +24,7 @@ export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {
             key={attribute}
             attribute={attribute}
             width={attributes[attribute]}
-          ></ProgressBar>
+          />
         )
       )}
     </AttributesDiv>

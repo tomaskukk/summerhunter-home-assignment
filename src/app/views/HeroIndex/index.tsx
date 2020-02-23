@@ -35,6 +35,7 @@ const HEROES_QUERY = gql`
         name
         damage
         element
+        description
       }
     }
   }
@@ -96,7 +97,7 @@ const handleLoading = () => <div>Loading...</div>;
 
 const handleError = (message: string) => <div>Error! {message}</div>;
 
-export const HeroIndex: React.FC<IHero> = () => {
+export const HeroIndex: React.FC<IHeroIndexProps> = () => {
   const {
     data: { heroes },
     error,
@@ -111,9 +112,7 @@ export const HeroIndex: React.FC<IHero> = () => {
     return handleLoading();
   }
 
-  const heroByName = name => {
-    return heroes.find(hero => hero.name === name);
-  };
+  const heroByName = name => heroes.find(hero => hero.name === name);
 
   return (
     <main>
@@ -121,7 +120,6 @@ export const HeroIndex: React.FC<IHero> = () => {
       <Hero />
 
       <Route
-        exact
         path="/"
         render={() => (
           <HeroCardContainer>
@@ -132,13 +130,14 @@ export const HeroIndex: React.FC<IHero> = () => {
         )}
       />
       <HeroPageContainer>
-        {/* <Route
+        <Route
           exact
           path="/heroes/:name"
           render={({ match }) => (
             <Heropage {...heroByName(match.params.name)} />
           )}
-        /> */}
+        />
+
         <Heropage {...heroByName("Gideon")} />
         <Heropage {...heroByName("Porcu")} />
         <Heropage {...heroByName("Lisa McAllister")} />

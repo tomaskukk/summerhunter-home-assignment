@@ -3,11 +3,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { HeadingOne, Paragraph, HeadingTwo, HeadingThree } from "../Typography";
-import { ProgressBar } from "./progressbar";
-import { HeroSkill } from "./heroskill";
 import { Attributes } from "./attributes";
 import { HeroStory } from "./herostory";
-import { SkillItem } from "./heroskill";
+import { HeroSkillContainer } from "./heroskillcontainer";
 
 interface IHeroPageProps {
   name: string;
@@ -38,14 +36,11 @@ export interface ISkills {
   name: string;
   damage: number;
   element: string;
+  description: string;
 }
 
-interface IProps {
+interface IPictureProps {
   imgUrl: string;
-}
-
-interface IButtonProps {
-  backgroundColor: string;
 }
 
 const HeroPageRoot = styled.div`
@@ -57,7 +52,7 @@ const HeroPageRoot = styled.div`
     linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
     linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
     linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)),
-    url(${(props: IProps) => props.imgUrl});
+    url(${(props: IPictureProps) => props.imgUrl});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -72,7 +67,7 @@ const Image = styled.div`
       rgba(0, 0, 0, 0.85)
     ),
     linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.85)),
-    url(${(props: IProps) => props.imgUrl});
+    url(${(props: IPictureProps) => props.imgUrl});
   min-height: 1000px;
   background-position: center;
   background-repeat: no-repeat;
@@ -98,61 +93,15 @@ const HeroNameHeading = styled(HeadingOne)`
   padding: 0px;
 `;
 
-const SkillHeading = styled(HeadingTwo)`
-  color: white;
-  width: 100%;
-  margin-top: 25px;
-`;
-
 const HeroContentContainer = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 40px;
-  display: -webkit-flex;
+  width: 80%;
   display: flex;
   justify-content: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -webkit-flex-wrap: wrap;
+  margin: 0 auto;
   flex-wrap: wrap;
 `;
 
-const HeroSkillContainer = styled.div`
-  margin: 30px;
-  padding: 10px;
-  min-width: 400px;
-  display: block;
-  text-align: left;
-  width: 40%;
-`;
-
-const SkillButtonContainer = styled.div`
-  display: inline-block;
-`;
-
-const ShowSkill = styled.a`
-font-family: "Montserrat";
-
-color: #001147
-  transition: all 0.3s ease 0s;
-  display: block;
-  width: 150px;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 300px;
-  border: none;
-  background-color: ${(props: IButtonProps) => props.backgroundColor};
-  :hover {
-color: #404040 ;
-font-weight: 500 ;
-letter-spacing: .3px;
-background: pink;
--webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
--moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-transition: all 0.3s ease 0s;
-}
-`;
-
-const LifePowerItem = styled(Paragraph)`
+const LifePowers = styled(Paragraph)`
   color: white;
   text-align: center;
   margin-top: -15px;
@@ -161,44 +110,21 @@ const LifePowerItem = styled(Paragraph)`
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
-  const [skillName, setSkillName] = React.useState("");
-
-  React.useEffect(() => setSkillName(props.skills[0].name), [props.skills]);
-  console.log(props);
-
   return (
     <HeroPageRoot imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
         <HeroNameHeading>{props.name}</HeroNameHeading>
-        <LifePowerItem>
-          {"Health: "} {props.lifepowers.healthpoints} {" ● "}
+        <LifePowers>
+          {"Health: "} {props.lifepowers.healthpoints} {" • "}
           {"Mana: "} {props.lifepowers.mana}
-        </LifePowerItem>{" "}
+        </LifePowers>
         <HeroContentContainer>
           <Attributes attributes={props.attributes} />
           <HeroStory
             description={props.description}
             backStory={props.backStory}
           />
-          <HeroSkillContainer>
-            <SkillHeading>{"Skills"}</SkillHeading>
-            <SkillButtonContainer>
-              {props.skills.map(skill => (
-                <HeroSkill key={skill.name} {...skill}></HeroSkill>
-              ))}
-            </SkillButtonContainer>
-          </HeroSkillContainer>
-          <HeroSkillContainer>
-            <SkillHeading>{"Elements"}</SkillHeading>
-            <SkillButtonContainer>
-              <SkillItem>
-                {"Resistance: "} {props.resistance}
-              </SkillItem>
-              <SkillItem>
-                {"Weakness: "} {props.weakness}
-              </SkillItem>
-            </SkillButtonContainer>
-          </HeroSkillContainer>
+          <HeroSkillContainer skills={props.skills} />
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

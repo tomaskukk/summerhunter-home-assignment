@@ -16,11 +16,9 @@ const ProgressBarRoot = styled.div`
   position: relative;
   height: 20px;
   width: 200px;
-  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.7);
   border: 1px groove white;
   border-radius: 5px;
-  margin: 0 auto;
   margin-bottom: 10px;
 `;
 
@@ -28,7 +26,7 @@ const Filler = styled.div`
   height: 100%;
   background: #f9f9f9;
   border-radius: inherit;
-  transition: width 0.2s ease-in;
+  transition: width 0.3s ease-in;
   width: ${(props: IFillerProps) => props.width}%;
 `;
 
@@ -36,14 +34,8 @@ const ProgressBarTitle = styled(Paragraph)`
   margin: 0px;
   padding 0px;
   color: white;
-  text-align:center;
   text-transform: uppercase;
   font-size: 20px;
-`;
-
-const TitleSpan = styled.span`
-  padding: 5px;
-  border-radius: 15px;
 `;
 
 export const ProgressBar: React.FC<IProgressBarProps> = ({
@@ -53,11 +45,8 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
   return (
     <>
       <ProgressBarTitle>
-        <TitleSpan>
-          {attribute} {attributeEmojis[attribute]}
-        </TitleSpan>
+        {attribute} {attributeEmojis[attribute]}
       </ProgressBarTitle>
-
       <ProgressBarRoot>
         <Filler width={width}></Filler>
       </ProgressBarRoot>

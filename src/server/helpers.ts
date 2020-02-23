@@ -2,6 +2,38 @@ import { getRepository } from "typeorm";
 import { Hero } from "./entities/hero";
 import { TElement } from "./types/element";
 
+/* interface IHeroType {
+  name: string;
+  imgUrl: string;
+  description: string;
+  backStory: string;
+  resistance: TElement;
+  weakness: TElement;
+  attributes: IHeroAttributes;
+  lifepowers: IHerolifepowers;
+  skills: IHeroSkill[];
+}
+
+interface IHeroAttributes {
+  strength: number;
+  intelligence: number;
+  stamina: number;
+  agility: number;
+  speed: number;
+}
+
+interface IHerolifepowers {
+  healthpoints: number;
+  mana: number;
+}
+
+interface IHeroSkill {
+  name: string;
+  damage: number;
+  element: string;
+  description: string;
+}
+ */
 const PORCU = {
   name: "Porcu",
   imgUrl: "http://localhost:8080/public/porcu.png",
@@ -132,7 +164,7 @@ const GIDEON = {
 
 export const seedDatabase = async () => {
   const heroRepository = getRepository(Hero);
-  const heroes = heroRepository.create([PORCU, LISA, GIDEON]);
+  const heroes = heroRepository.create([PORCU, GIDEON, LISA]);
 
   await heroRepository.save(heroes);
 };

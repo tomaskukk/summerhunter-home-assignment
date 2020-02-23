@@ -13,6 +13,14 @@ interface IHeroCardProps {
   attributes: IAttributes;
 }
 
+export const attributeEmojis = {
+  strength: "💪",
+  intelligence: "🧠",
+  agility: "🤸",
+  speed: "🏃",
+  stamina: "🧘"
+};
+
 const HeroCardDiv = styled.div`
   padding: 15px;
   max-width: 400px;
@@ -42,13 +50,6 @@ const LinkToHeroPage = styled(Link)`
   font-weight: 800;
 `;
 
-export const attributeEmojis = {
-  strength: "💪",
-  intelligence: "🧠",
-  agility: "🤸",
-  speed: "🏃",
-  stamina: "🧘"
-};
 export const HeroCard: React.FC<IHeroCardProps> = ({
   name,
   imgUrl,
@@ -66,9 +67,7 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
     return attributeEmojis[highest];
   };
 
-  // || "Something else to render if fetching description fails?"
-  const firstSentenceFromDescription = description.split(".")[0];
-  // const namePathWithoutWhiteSpaces = name.replace(/\s/g, "");
+  const firstSentenceFromDescription = description.split(".")[0] || "";
 
   return (
     <HeroCardDiv>
