@@ -59,16 +59,11 @@ interface IHero {
 }
 
 const HeroCardContainer = styled.div`
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: center;
   justify-content: center;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-top: 15px;
   padding: 1.5%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 
   @media (min-width: 1400px) {
@@ -78,14 +73,9 @@ const HeroCardContainer = styled.div`
 `;
 
 const HeroPageContainer = styled.div`
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: center;
   justify-content: center;
-  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   @media (min-width: 1400px) {
     margin-left: auto;
@@ -139,9 +129,9 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
           )}
         />
 
-        <Heropage {...heroByName("Gideon")} />
+        {/*         <Heropage {...heroByName("Gideon")} />
         <Heropage {...heroByName("Porcu")} />
-        <Heropage {...heroByName("Lisa McAllister")} />
+        <Heropage {...heroByName("Lisa McAllister")} /> */}
       </HeroPageContainer>
       <Footer />
     </main>

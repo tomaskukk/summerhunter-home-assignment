@@ -123,9 +123,16 @@ export const SectionHeading = styled(HeadingTwo)`
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
-  console.log(props);
+  const rootRef = React.useRef(null);
+
+  React.useEffect(
+    () =>
+      window.scrollTo({ top: rootRef.current.offsetTop, behavior: "smooth" }),
+    [props]
+  );
+
   return (
-    <HeroPageRoot imgUrl={props.imgUrl}>
+    <HeroPageRoot ref={rootRef} imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
         <HeroNameHeading>{props.name}</HeroNameHeading>
         <LifePowers>
