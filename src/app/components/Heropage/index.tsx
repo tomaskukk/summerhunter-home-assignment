@@ -6,14 +6,14 @@ import { HeadingOne, Paragraph, HeadingTwo, HeadingThree } from "../Typography";
 import { Attributes } from "./attributes";
 import { HeroStory } from "./herostory";
 import { HeroSkillContainer } from "./heroskillcontainer";
+import { HeroElements } from "./elements";
 
 interface IHeroPageProps {
   name: string;
   description: string;
   imgUrl: string;
   backStory: string;
-  resistance: string;
-  weakness: string;
+  traits: ITraits;
   attributes: IAttributes;
   lifepowers: ILifepowers;
   skills: [ISkills];
@@ -30,6 +30,11 @@ export interface IAttributes {
 export interface ILifepowers {
   healthpoints: number;
   mana: number;
+}
+
+export interface ITraits {
+  resistance: string;
+  weakness: string;
 }
 
 export interface ISkills {
@@ -94,7 +99,7 @@ const HeroNameHeading = styled(HeadingOne)`
 `;
 
 const HeroContentContainer = styled.div`
-  width: 80%;
+  width: 95%;
   display: flex;
   justify-content: space-evenly;
   margin: 0 auto;
@@ -109,7 +114,16 @@ const LifePowers = styled(Paragraph)`
   text-transform: uppercase;
 `;
 
+export const SectionHeading = styled(HeadingTwo)`
+  color: white;
+  width: 100%;
+  margin-top: 25px;
+  text-transform: uppercase;
+  font-style: italic;
+`;
+
 export const Heropage: React.FC<IHeroPageProps> = props => {
+  console.log(props);
   return (
     <HeroPageRoot imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
@@ -125,6 +139,7 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
             backStory={props.backStory}
           />
           <HeroSkillContainer skills={props.skills} />
+          <HeroElements {...props.traits} />
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

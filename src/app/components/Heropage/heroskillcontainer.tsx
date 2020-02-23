@@ -1,8 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { ISkills } from "@componentsHeropage";
-import { HeadingTwo } from "../Typography";
+import { HeadingTwo, Paragraph } from "../Typography";
 import { HeroSkill } from "./heroskill";
+import { SectionHeading } from "./index";
 
 interface ISkillContainerProps {
   skills: ISkills[];
@@ -14,29 +15,33 @@ interface IButtonProps {
 
 const HeroSkillRoot = styled.div`
   display: block;
-  text-align: left;
   margin-top: 50px;
-  min-width: 50%;
-  width: 100%;
-  margin: 10px;
+  max-width: 40%;
+  min-width: 250px;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
 `;
 
 const ShowSkill = styled.button`
   font-family: "Montserrat";
   color: #001147
   transition: all 0.3s ease 0s;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 300px;
+    padding: 10px;
   border: none;
+  text-transform: uppercase;
+  border-radius: 10px;
+font-size: 15px;
+
   background-color: ${(props: IButtonProps) => props.backgroundColor};
 `;
 
-const SkillHeading = styled(HeadingTwo)`
-  color: white;
-  width: 100%;
-  margin-top: 25px;
-  text-transform: uppercase;
+const ButtonText = styled(Paragraph)`
+  color: black;
+  margin: 0px;
+  padding: 0px;
 `;
 
 export const HeroSkillContainer: React.FC<ISkillContainerProps> = props => {
@@ -45,14 +50,14 @@ export const HeroSkillContainer: React.FC<ISkillContainerProps> = props => {
 
   return (
     <HeroSkillRoot>
-      <SkillHeading>{"Skills"}</SkillHeading>
+      <SectionHeading>{"Skills"}</SectionHeading>
       {props.skills.map((skill, i) => (
         <ShowSkill
           onClick={() => setSkillName(skill.name)}
           backgroundColor={skill.name === skillName ? "moccasin" : "white"}
           key={skill.name}
         >
-          {skill.name}
+          <ButtonText>{skill.name}</ButtonText>
         </ShowSkill>
       ))}
       <HeroSkill {...props.skills.find(skill => skill.name === skillName)} />

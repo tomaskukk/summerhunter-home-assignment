@@ -2,13 +2,13 @@ import * as React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
 import styled from "styled-components";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { TopBar } from "../../components/TopBar";
 import { Hero } from "../../components/Hero";
 import { Footer } from "../../components/Footer";
 import { HeroCard } from "../../components/HeroCard";
-import { Heropage } from "../../components/Heropage";
+import { Heropage, ITraits } from "../../components/Heropage";
 import { IAttributes, ILifepowers, ISkills } from "../../components/Heropage";
 
 const HEROES_QUERY = gql`
@@ -18,8 +18,10 @@ const HEROES_QUERY = gql`
       imgUrl
       description
       backStory
-      resistance
-      weakness
+      traits {
+        resistance
+        weakness
+      }
       attributes {
         strength
         intelligence
@@ -50,8 +52,7 @@ interface IHero {
   backStory: string;
   healthpoints: number;
   mana: number;
-  resistance: string;
-  weakness: string;
+  traits: ITraits;
   attributes: IAttributes;
   lifepowers: ILifepowers;
   skills: [ISkills];

@@ -12,7 +12,7 @@ import {
 import { ObjectType, ID, Field } from "type-graphql";
 import { Lazy } from "../helpers";
 import { Skill } from "../entities/skill";
-import { TElement } from "../types/element";
+import { Trait } from "./traits";
 
 @Entity()
 @ObjectType()
@@ -37,18 +37,15 @@ export class Hero {
   @Column()
   backStory: string;
 
-  @Field()
-  @Column()
-  resistance: TElement;
-
-  @Field()
-  @Column()
-  weakness: TElement;
-
   @Field(type => [Skill])
   @ManyToMany(type => Skill, { lazy: true, cascade: ["insert"] })
   @JoinTable()
   skills: Lazy<Skill[]>;
+
+  @Field(type => Trait)
+  @OneToOne(type => Trait, { lazy: true, cascade: ["insert"] })
+  @JoinColumn()
+  traits: Lazy<Trait>;
 
   @Field(type => Attribute)
   @OneToOne(type => Attribute, { lazy: true, cascade: ["insert"] })

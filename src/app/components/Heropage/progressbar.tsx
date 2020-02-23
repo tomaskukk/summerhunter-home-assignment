@@ -20,8 +20,13 @@ const ProgressBarRoot = styled.div`
   border: 1px groove white;
   border-radius: 5px;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    margin: 0 auto;
+    text-align: center;
+  }
 `;
 
+// Pass the attributes number as width
 const Filler = styled.div`
   height: 100%;
   background: #f9f9f9;

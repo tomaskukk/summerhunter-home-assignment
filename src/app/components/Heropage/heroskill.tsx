@@ -12,6 +12,7 @@ interface IHeroSkillsProps {
 const SkillRootContainer = styled.div`
   display: inline-block;
   width: 100%;
+  margin: 0 auto;
 `;
 
 const SkillContentContainer = styled.div`
@@ -22,16 +23,20 @@ const SkillItemContainer = styled.div`
   display: inline-block;
 `;
 
-const SkillTitle = styled(HeadingTwo)`
+const SkillTitle = styled(Paragraph)`
+  font-size: 30px;
   color: white;
 `;
 
 const SkillItemDescription = styled(Paragraph)`
-  width: 65%;
+  width: 100%;
   font-size: 20px;
   color: white;
   margin-top: 0px;
   padding-top: 0px;
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 export const HeroSkill: React.FC<IHeroSkillsProps> = ({
@@ -44,8 +49,8 @@ export const HeroSkill: React.FC<IHeroSkillsProps> = ({
       <SkillContentContainer>
         <SkillItemContainer>
           <ReactTooltip />
-          <SkillTitle data-tip={"Damage"}> 🔪 {damage}</SkillTitle>
           <SkillTitle data-tip={"Element"}>🔘 {element}</SkillTitle>
+          <SkillTitle data-tip={"Damage"}> 🔪 {damage}</SkillTitle>
         </SkillItemContainer>
         <SkillItemDescription>{description}</SkillItemDescription>
       </SkillContentContainer>

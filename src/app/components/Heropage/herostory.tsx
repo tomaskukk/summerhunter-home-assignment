@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Paragraph } from "../Typography";
+import { SectionHeading } from "./index";
 
 interface IHerostoryProps {
   description: string;
@@ -36,12 +37,14 @@ export const HeroStory: React.FC<IHerostoryProps> = ({
   const [showBackStory, setShowBackStory] = React.useState(false);
 
   return (
-    <HeroStoryContainer>
-      {description}
-      {showBackStory ? backStory : null}
-      <ShowMoreButton onClick={() => setShowBackStory(!showBackStory)}>
-        {showBackStory ? "Show less" : "Show more"}
-      </ShowMoreButton>
-    </HeroStoryContainer>
+    <>
+      <HeroStoryContainer>
+        {description}
+        {showBackStory ? backStory : null}
+        <ShowMoreButton onClick={() => setShowBackStory(!showBackStory)}>
+          {showBackStory ? "Show less" : "Show more"}
+        </ShowMoreButton>
+      </HeroStoryContainer>
+    </>
   );
 };

@@ -12,13 +12,14 @@ import { Skill } from "./entities/skill";
 import { HeroResolver } from "./resolvers/hero-resolver";
 
 import { seedDatabase } from "./helpers";
+import { Trait } from "./entities/traits";
 
 useContainer(Container);
 
 const databaseOptions: ConnectionOptions = {
   type: "sqlite",
   database: `${path.resolve(__dirname, ".")}/data/db.sqlite`,
-  entities: [Hero, Skill, Attribute, Lifepower],
+  entities: [Hero, Skill, Attribute, Lifepower, Trait],
   logging: false // switch to 'all' or true to enable database query logging
 };
 
