@@ -29,7 +29,6 @@ const SkillTitle = styled(Paragraph)`
 `;
 
 const SkillItemDescription = styled(Paragraph)`
-  width: 100%;
   font-size: 20px;
   color: white;
   margin-top: 0px;

@@ -38,10 +38,13 @@ export const HeroStory: React.FC<IHerostoryProps> = ({
 
   return (
     <>
-      <HeroStoryContainer>
+      <HeroStoryContainer className="herostory">
         {description}
         {showBackStory ? backStory : null}
-        <ShowMoreButton onClick={() => setShowBackStory(!showBackStory)}>
+        <ShowMoreButton
+          className="backstory-button"
+          onClick={() => setShowBackStory(!showBackStory)}
+        >
           {showBackStory ? "Show less" : "Show more"}
         </ShowMoreButton>
       </HeroStoryContainer>

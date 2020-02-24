@@ -53,7 +53,7 @@ export const ProgressBar: React.FC<IProgressBarProps> = ({
         {attribute} {attributeEmojis[attribute]}
       </ProgressBarTitle>
       <ProgressBarRoot>
-        <Filler width={width}></Filler>
+        <Filler className={`progressbar-${attribute}`} width={width}></Filler>
       </ProgressBarRoot>
     </>
   );

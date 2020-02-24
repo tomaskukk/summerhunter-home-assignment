@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { HeadingTwo } from "../Typography";
 import ReactTooltip from "react-tooltip";
+import { SectionHeading } from "./index";
 
 interface IHeroElementsProps {
   resistance: string;
@@ -17,14 +18,6 @@ const elementEmojis = {
 const ElementsRoot = styled.div`
   width: 50%;
   margin-top: 50px;
-`;
-const ElementHeading = styled(HeadingTwo)`
-  color: white;
-  width: 100%;
-  text-transform: uppercase;
-  font-style: italic;
-  text-align: center;
-  margin-top: 25px;
 `;
 
 const ElementsDiv = styled.div`
@@ -58,7 +51,7 @@ export const HeroElements: React.FC<IHeroElementsProps> = ({
     <ElementsRoot>
       <ReactTooltip />
 
-      <ElementHeading>{"Traits"}</ElementHeading>
+      <SectionHeading>{"Traits"}</SectionHeading>
       <ElementsDiv>
         <ElementItem>
           <ElementItemHeading>{"Resistance"}</ElementItemHeading>

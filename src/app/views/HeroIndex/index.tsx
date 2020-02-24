@@ -129,7 +129,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
           )}
         />
 
-        {/*         <Heropage {...heroByName("Gideon")} />
+        {/*       <Heropage {...heroByName("Gideon")} />
         <Heropage {...heroByName("Porcu")} />
         <Heropage {...heroByName("Lisa McAllister")} /> */}
       </HeroPageContainer>

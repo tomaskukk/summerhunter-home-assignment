@@ -76,7 +76,9 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
       </HeroHeading>
       <HeroImg src={imgUrl}></HeroImg>
       <Paragraph>{firstSentenceFromDescription}...</Paragraph>
-      <LinkToHeroPage to={`/heroes/${name}`}>{"Show more"}</LinkToHeroPage>
+      <LinkToHeroPage className={`${name}-herolink`} to={`/heroes/${name}`}>
+        {"Show more"}
+      </LinkToHeroPage>
     </HeroCardDiv>
   );
 };

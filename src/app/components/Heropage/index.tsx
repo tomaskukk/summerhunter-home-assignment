@@ -120,6 +120,7 @@ export const SectionHeading = styled(HeadingTwo)`
   margin-top: 25px;
   text-transform: uppercase;
   font-style: italic;
+  text-align: center;
 `;
 
 export const Heropage: React.FC<IHeroPageProps> = props => {
@@ -134,8 +135,10 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
   return (
     <HeroPageRoot ref={rootRef} imgUrl={props.imgUrl}>
       <Image imgUrl={props.imgUrl}>
-        <HeroNameHeading>{props.name}</HeroNameHeading>
-        <LifePowers>
+        <HeroNameHeading className="heropage-heading">
+          {props.name}
+        </HeroNameHeading>
+        <LifePowers className="hero-lifepowers">
           {"Health: "} {props.lifepowers.healthpoints} {" • "}
           {"Mana: "} {props.lifepowers.mana}
         </LifePowers>
