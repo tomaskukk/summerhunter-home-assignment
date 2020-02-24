@@ -22,6 +22,10 @@ export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {
   return (
     <>
       <AttributesDiv>
+        {/* 
+          wasn't sure how to strip typename field well so 
+          made an alternative array
+        */}
         {["strength", "agility", "stamina", "speed", "intelligence"].map(
           attribute => (
             <ProgressBar

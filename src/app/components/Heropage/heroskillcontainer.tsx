@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { ISkills } from "@componentsHeropage";
-import { HeadingTwo, Paragraph } from "../Typography";
+import { Paragraph } from "../Typography";
 import { HeroSkill } from "./heroskill";
 import { SectionHeading } from "./index";
 
@@ -17,7 +17,7 @@ const HeroSkillRoot = styled.div`
   display: block;
   margin-top: 50px;
   max-width: 40%;
-  min-width: 250px;
+  min-width: 300px;
   @media (max-width: 768px) {
     width: 100%;
     margin: 0 auto;
@@ -38,29 +38,37 @@ font-size: 15px;
   background-color: ${(props: IButtonProps) => props.backgroundColor};
 `;
 
+const ButtonContainer = styled.div`
+  text-align: center;
+`;
+
 const ButtonText = styled(Paragraph)`
   color: black;
   margin: 0px;
   padding: 0px;
 `;
 
-export const HeroSkillContainer: React.FC<ISkillContainerProps> = props => {
+export const HeroSkillContainer: React.FC<ISkillContainerProps> = ({
+  skills
+}) => {
   const [skillName, setSkillName] = React.useState("");
-  React.useEffect(() => setSkillName(props.skills[0].name), [props.skills]);
+  React.useEffect(() => setSkillName(skills[0].name), [skills]);
 
   return (
     <HeroSkillRoot>
       <SectionHeading>{"Skills"}</SectionHeading>
-      {props.skills.map((skill, i) => (
-        <ShowSkill
-          onClick={() => setSkillName(skill.name)}
-          backgroundColor={skill.name === skillName ? "moccasin" : "white"}
-          key={skill.name}
-        >
-          <ButtonText>{skill.name}</ButtonText>
-        </ShowSkill>
-      ))}
-      <HeroSkill {...props.skills.find(skill => skill.name === skillName)} />
+      <ButtonContainer>
+        {skills.map(skill => (
+          <ShowSkill
+            onClick={() => setSkillName(skill.name)}
+            backgroundColor={skill.name === skillName ? "moccasin" : "white"}
+            key={skill.name}
+          >
+            <ButtonText>{skill.name}</ButtonText>
+          </ShowSkill>
+        ))}
+      </ButtonContainer>
+      <HeroSkill {...skills.find(skill => skill.name === skillName)} />
     </HeroSkillRoot>
   );
 };

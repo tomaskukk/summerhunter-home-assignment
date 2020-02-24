@@ -56,17 +56,26 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
   description,
   attributes
 }) => {
-  const getHighestAttributeEmoji = () => {
-    let attributesWithoutTypename = { ...attributes };
-    delete attributesWithoutTypename["__typename"];
-    const highest: string = Object.keys(
+  const getHighestAttributeEmoji = (): string => {
+    // make an object with typename -infinity since ->
+    // it might cause trouble as a strirng when comparing values
+    const attributesWithoutTypename = {
+      ...attributes,
+      __typename: -Infinity
+    };
+    const highestAttribute = getHighestValueFromObject(
       attributesWithoutTypename
-    ).reduce((a, b) =>
-      attributesWithoutTypename[a] > attributesWithoutTypename[b] ? a : b
     );
-    return attributeEmojis[highest];
+    return attributeEmojis[highestAttribute];
   };
 
+  const getHighestValueFromObject = (object): string => {
+    return Object.keys(object).reduce((a, b) =>
+      object[a] > object[b] ? a : b
+    );
+  };
+
+  // Get the first sentence to only show short description in herocard
   const firstSentenceFromDescription = description.split(".")[0] || "";
 
   return (

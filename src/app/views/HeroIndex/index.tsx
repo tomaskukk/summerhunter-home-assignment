@@ -17,11 +17,6 @@ const HEROES_QUERY = gql`
       name
       imgUrl
       description
-      backStory
-      traits {
-        resistance
-        weakness
-      }
       attributes {
         strength
         intelligence
@@ -29,23 +24,11 @@ const HEROES_QUERY = gql`
         agility
         speed
       }
-      lifepowers {
-        healthpoints
-        mana
-      }
-      skills {
-        name
-        damage
-        element
-        description
-      }
     }
   }
 `;
 
-interface IHeroIndexProps {}
-
-interface IHero {
+export interface IHero {
   name: string;
   imgUrl: string;
   description: string;
@@ -84,11 +67,11 @@ const HeroPageContainer = styled.div`
   color: white;
 `;
 
-const handleLoading = () => <div>Loading...</div>;
+export const handleLoading = () => <div>Loading...</div>;
 
-const handleError = (message: string) => <div>Error! {message}</div>;
+export const handleError = (message: string) => <div>Error! {message}</div>;
 
-export const HeroIndex: React.FC<IHeroIndexProps> = () => {
+export const HeroIndex: React.FC = () => {
   const {
     data: { heroes },
     error,
@@ -103,7 +86,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
     return handleLoading();
   }
 
-  const heroByName = name => heroes.find(hero => hero.name === name);
+  const heroByName = (name: string) => heroes.find(hero => hero.name === name);
 
   return (
     <main>
@@ -128,10 +111,6 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
             <Heropage {...heroByName(match.params.name)} />
           )}
         />
-
-        {/*       <Heropage {...heroByName("Gideon")} />
-        <Heropage {...heroByName("Porcu")} />
-        <Heropage {...heroByName("Lisa McAllister")} /> */}
       </HeroPageContainer>
       <Footer />
     </main>

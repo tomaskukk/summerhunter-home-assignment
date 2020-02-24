@@ -15,4 +15,10 @@ export class HeroResolver {
     const heroRepository = this.heroRepository.find();
     return heroRepository;
   }
+
+  @Query(returns => Hero)
+  async heroByName(@Arg("name") name: string) {
+    const hero = await this.heroRepository.findOne({ name: name });
+    return hero;
+  }
 }

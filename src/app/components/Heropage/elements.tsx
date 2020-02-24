@@ -46,11 +46,9 @@ export const HeroElements: React.FC<IHeroElementsProps> = ({
   resistance,
   weakness
 }) => {
-  console.log(resistance, weakness);
   return (
     <ElementsRoot>
       <ReactTooltip />
-
       <SectionHeading>{"Traits"}</SectionHeading>
       <ElementsDiv>
         <ElementItem>

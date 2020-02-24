@@ -1,12 +1,35 @@
-// It is your job to implement this. More info in README
-
+import gql from "graphql-tag";
 import * as React from "react";
 import styled from "styled-components";
-import { HeadingOne, Paragraph, HeadingTwo, HeadingThree } from "../Typography";
+import { HeadingOne, Paragraph, HeadingTwo } from "../Typography";
 import { Attributes } from "./attributes";
 import { HeroStory } from "./herostory";
 import { HeroSkillContainer } from "./heroskillcontainer";
 import { HeroElements } from "./elements";
+import { useQuery } from "react-apollo-hooks";
+import { IHero, handleError, handleLoading } from "../../views/HeroIndex";
+
+const HERO_BY_NAME = name => gql`
+  query {
+    heroByName(name: ${name}) {
+      backStory
+      traits {
+        resistance
+        weakness
+      }
+      lifepowers {
+        healthpoints
+        mana
+      }
+      skills {
+        name
+        damage
+        element
+        description
+      }
+    }
+  }
+`;
 
 interface IHeroPageProps {
   name: string;
@@ -123,14 +146,48 @@ export const SectionHeading = styled(HeadingTwo)`
   text-align: center;
 `;
 
+// since we are provided with graphql api lets use it as it should be used
+// lets get the information needed only after we need it
+// doesn't really matter in this app, but if it would be a bigger application
+// it migth matter a lot
+
 export const Heropage: React.FC<IHeroPageProps> = props => {
   const rootRef = React.useRef(null);
+
+  const {
+    data: { heroByName },
+    error,
+    loading
+  } = useQuery<{ heroByName: IHero }>(HERO_BY_NAME(JSON.stringify(props.name)));
 
   React.useEffect(
     () =>
       window.scrollTo({ top: rootRef.current.offsetTop, behavior: "smooth" }),
+
     [props]
   );
+
+  if (error) {
+    return handleError(error.message);
+  }
+
+  // lets give all the information we can from props while loading
+  // and serve rest after query is complete
+  if (loading) {
+    return (
+      <HeroPageRoot ref={rootRef} imgUrl={props.imgUrl}>
+        <Image imgUrl={props.imgUrl}>
+          <HeroNameHeading className="heropage-heading">
+            {props.name}
+          </HeroNameHeading>
+
+          <HeroContentContainer>
+            <Attributes attributes={props.attributes} />
+          </HeroContentContainer>
+        </Image>
+      </HeroPageRoot>
+    );
+  }
 
   return (
     <HeroPageRoot ref={rootRef} imgUrl={props.imgUrl}>
@@ -139,17 +196,17 @@ export const Heropage: React.FC<IHeroPageProps> = props => {
           {props.name}
         </HeroNameHeading>
         <LifePowers className="hero-lifepowers">
-          {"Health: "} {props.lifepowers.healthpoints} {" • "}
-          {"Mana: "} {props.lifepowers.mana}
+          {"Health: "} {heroByName.lifepowers.healthpoints} {" • "}
+          {"Mana: "} {heroByName.lifepowers.mana}
         </LifePowers>
         <HeroContentContainer>
           <Attributes attributes={props.attributes} />
           <HeroStory
             description={props.description}
-            backStory={props.backStory}
+            backStory={heroByName.backStory}
           />
-          <HeroSkillContainer skills={props.skills} />
-          <HeroElements {...props.traits} />
+          <HeroSkillContainer skills={heroByName.skills} />
+          <HeroElements {...heroByName.traits} />
         </HeroContentContainer>
       </Image>
     </HeroPageRoot>

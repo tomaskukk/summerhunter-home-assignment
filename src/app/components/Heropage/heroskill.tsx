@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Paragraph, HeadingTwo } from "../Typography";
+import { Paragraph } from "../Typography";
 import ReactTooltip from "react-tooltip";
 
 interface IHeroSkillsProps {
@@ -15,12 +15,10 @@ const SkillRootContainer = styled.div`
   margin: 0 auto;
 `;
 
-const SkillContentContainer = styled.div`
-  display: inline-block;
-`;
-
 const SkillItemContainer = styled.div`
-  display: inline-block;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 `;
 
 const SkillTitle = styled(Paragraph)`
@@ -45,14 +43,12 @@ export const HeroSkill: React.FC<IHeroSkillsProps> = ({
 }) => {
   return (
     <SkillRootContainer>
-      <SkillContentContainer>
-        <SkillItemContainer>
-          <ReactTooltip />
-          <SkillTitle data-tip={"Element"}>🔘 {element}</SkillTitle>
-          <SkillTitle data-tip={"Damage"}> 🔪 {damage}</SkillTitle>
-        </SkillItemContainer>
-        <SkillItemDescription>{description}</SkillItemDescription>
-      </SkillContentContainer>
+      <SkillItemContainer>
+        <ReactTooltip />
+        <SkillTitle data-tip={"Element"}>🔘 {element}</SkillTitle>
+        <SkillTitle data-tip={"Damage"}> 🔪 {damage}</SkillTitle>
+      </SkillItemContainer>
+      <SkillItemDescription>{description}</SkillItemDescription>
     </SkillRootContainer>
   );
 };

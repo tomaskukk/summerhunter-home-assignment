@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Paragraph } from "../Typography";
-import { SectionHeading } from "./index";
 
 interface IHerostoryProps {
   description: string;

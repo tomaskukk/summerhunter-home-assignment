@@ -31,7 +31,7 @@ const Filler = styled.div`
   height: 100%;
   background: #f9f9f9;
   border-radius: inherit;
-  transition: width 0.3s ease-in;
+  transition: width 0.5s ease-in;
   width: ${(props: IFillerProps) => props.width}%;
 `;
 
