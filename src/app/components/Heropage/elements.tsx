@@ -50,14 +50,15 @@ export const HeroElements: React.FC<IHeroElementsProps> = ({
     <ElementsRoot>
       <ReactTooltip />
       <SectionHeading>{"Traits"}</SectionHeading>
-      <ElementsDiv>
-        <ElementItem>
+      <ElementsDiv className="traits">
+        <ElementItem className="traits-resistance">
           <ElementItemHeading>{"Resistance"}</ElementItemHeading>
           <ElementItemEmoji data-tip={resistance}>
             {elementEmojis[resistance]}
           </ElementItemEmoji>
         </ElementItem>
-        <ElementItem>
+
+        <ElementItem className="traits-weakness">
           <ElementItemHeading>{"Weakness"}</ElementItemHeading>
           <ElementItemEmoji data-tip={weakness}>
             {elementEmojis[weakness]}

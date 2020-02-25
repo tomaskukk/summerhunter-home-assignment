@@ -1,4 +1,4 @@
-context("Heropage", () => {
+context("Gideon's heropage", () => {
   beforeEach(() => {
     cy.visit("http://localhost:8080");
     cy.get(".Gideon-herolink").click();
@@ -46,6 +46,34 @@ context("Heropage", () => {
         "not.contain",
         "Little did he know of his future before awakening his powers"
       );
+    });
+  });
+
+  describe("Skills", () => {
+    it("Will show two skills, telekinesis and psybeam", () => {
+      cy.contains("Telekinesis");
+      cy.contains("Psybeam");
+    });
+    it("Psybeam can be clicked and damage will be 150", () => {
+      cy.get(".Psybeam-button").click();
+      cy.get(".skill-damage").contains("150");
+    });
+    it("Psybeam can be clicked and element will be psychic", () => {
+      cy.get(".Psybeam-button").click();
+      cy.get(".skill-element").contains("Psychic");
+    });
+    it("Psybeam can be clicked and text will be correct", () => {
+      cy.get(".Psybeam-button").click();
+      cy.get(".skill-description").contains("Shoots a psychic beam.");
+    });
+  });
+
+  describe("Traits", () => {
+    it("Resistance should contain 🌪️", () => {
+      cy.get(".traits-resistance").contains("🌪️");
+    });
+    it("Weakness should contain 🔥", () => {
+      cy.get(".traits-weakness").contains("🔥");
     });
   });
 });

@@ -8,8 +8,7 @@ import { TopBar } from "../../components/TopBar";
 import { Hero } from "../../components/Hero";
 import { Footer } from "../../components/Footer";
 import { HeroCard } from "../../components/HeroCard";
-import { Heropage, ITraits } from "../../components/Heropage";
-import { IAttributes, ILifepowers, ISkills } from "../../components/Heropage";
+import { Heropage } from "../../components/Heropage";
 
 const HEROES_QUERY = gql`
   query {
@@ -41,6 +40,31 @@ export interface IHero {
   skills: [ISkills];
 }
 
+export interface IAttributes {
+  agility: number;
+  intelligence: number;
+  speed: number;
+  stamina: number;
+  strength: number;
+}
+
+export interface ILifepowers {
+  healthpoints: number;
+  mana: number;
+}
+
+export interface ITraits {
+  resistance: string;
+  weakness: string;
+}
+
+export interface ISkills {
+  name: string;
+  damage: number;
+  element: string;
+  description: string;
+}
+
 const HeroCardContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -67,7 +91,7 @@ const HeroPageContainer = styled.div`
   color: white;
 `;
 
-export const handleLoading = () => <div>Loading...</div>;
+const handleLoading = () => <div>Loading...</div>;
 
 export const handleError = (message: string) => <div>Error! {message}</div>;
 
@@ -92,7 +116,6 @@ export const HeroIndex: React.FC = () => {
     <main>
       <TopBar />
       <Hero />
-
       <Route
         path="/"
         render={() => (

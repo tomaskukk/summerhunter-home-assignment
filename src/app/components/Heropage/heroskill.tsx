@@ -19,6 +19,7 @@ const SkillItemContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+  flex-wrap: wrap;
 `;
 
 const SkillTitle = styled(Paragraph)`
@@ -31,9 +32,7 @@ const SkillItemDescription = styled(Paragraph)`
   color: white;
   margin-top: 0px;
   padding-top: 0px;
-  @media (max-width: 768px) {
-    margin: 0 auto;
-  }
+  text-align: center;
 `;
 
 export const HeroSkill: React.FC<IHeroSkillsProps> = ({
@@ -45,10 +44,16 @@ export const HeroSkill: React.FC<IHeroSkillsProps> = ({
     <SkillRootContainer>
       <SkillItemContainer>
         <ReactTooltip />
-        <SkillTitle data-tip={"Element"}>🔘 {element}</SkillTitle>
-        <SkillTitle data-tip={"Damage"}> 🔪 {damage}</SkillTitle>
+        <SkillTitle className="skill-element" data-tip={"Element"}>
+          🔘 {element}
+        </SkillTitle>
+        <SkillTitle className="skill-damage" data-tip={"Damage"}>
+          🔪 {damage}
+        </SkillTitle>
       </SkillItemContainer>
-      <SkillItemDescription>{description}</SkillItemDescription>
+      <SkillItemDescription className="skill-description">
+        {description}
+      </SkillItemDescription>
     </SkillRootContainer>
   );
 };

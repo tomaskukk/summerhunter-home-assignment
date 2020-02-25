@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ISkills } from "@componentsHeropage";
+import { ISkills } from "../../views/HeroIndex";
 import { Paragraph } from "../Typography";
 import { HeroSkill } from "./heroskill";
 import { SectionHeading } from "./index";
@@ -16,8 +16,7 @@ interface IButtonProps {
 const HeroSkillRoot = styled.div`
   display: block;
   margin-top: 50px;
-  max-width: 40%;
-  min-width: 300px;
+  width: 40%;
   @media (max-width: 768px) {
     width: 100%;
     margin: 0 auto;
@@ -60,6 +59,7 @@ export const HeroSkillContainer: React.FC<ISkillContainerProps> = ({
       <ButtonContainer>
         {skills.map(skill => (
           <ShowSkill
+            className={`${skill.name}-button`}
             onClick={() => setSkillName(skill.name)}
             backgroundColor={skill.name === skillName ? "moccasin" : "white"}
             key={skill.name}

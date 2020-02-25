@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IAttributes, SectionHeading } from "./index";
 import { ProgressBar } from "./progressbar";
+import { IAttributes } from "../../views/HeroIndex";
 
 interface IAttributesProps {
   attributes: IAttributes;
@@ -23,7 +23,7 @@ export const Attributes: React.FC<IAttributesProps> = ({ attributes }) => {
     <>
       <AttributesDiv>
         {/* 
-          wasn't sure how to strip typename field well so 
+          wasn't sure how to strip typename field properly so 
           made an alternative array
         */}
         {["strength", "agility", "stamina", "speed", "intelligence"].map(

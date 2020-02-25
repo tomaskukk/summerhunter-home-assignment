@@ -4,7 +4,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Paragraph, HeadingTwo } from "../../components/Typography";
 import { Link } from "react-router-dom";
-import { IAttributes } from "../Heropage";
+import { IAttributes } from "../../views/HeroIndex";
 
 interface IHeroCardProps {
   name: string;
@@ -57,8 +57,8 @@ export const HeroCard: React.FC<IHeroCardProps> = ({
   attributes
 }) => {
   const getHighestAttributeEmoji = (): string => {
-    // make an object with typename -infinity since ->
-    // it might cause trouble as a strirng when comparing values
+    // make an object with typename -infinity since
+    // it might cause trouble as a string when comparing values
     const attributesWithoutTypename = {
       ...attributes,
       __typename: -Infinity

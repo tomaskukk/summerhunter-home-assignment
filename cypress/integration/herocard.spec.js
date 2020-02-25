@@ -20,41 +20,5 @@ context("Herocard", () => {
       cy.get(".Porcu-herolink").click();
       cy.location("pathname").should("include", "heroes/Porcu");
     });
-
-    describe("query: getHeroNames()", () => {
-      const GetHeroNames = () => `{
-            heroes {
-                name
-            }
-        }`;
-
-      let responseData;
-      before(() => {
-        cy.postGQL(GetHeroNames()).then(res => (responseData = res.body.data));
-      });
-      it("returns an array of correct names", () => {
-        assert.isArray(responseData.heroes);
-      });
-    });
-
-    describe("query: lifepowers()", () => {
-      const GetHeroLifepowers = () => `{
-              heroes {
-                  lifepowers {
-                    healthpoints
-                  }
-              }
-          }`;
-
-      let responseData;
-      before(() => {
-        cy.postGQL(GetHeroLifepowers()).then(
-          res => (responseData = res.body.data)
-        );
-      });
-      it("returns number inside lifepower object", () => {
-        assert.isNumber(responseData.heroes[0].lifepowers.healthpoints);
-      });
-    });
   });
 });

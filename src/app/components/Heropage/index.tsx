@@ -7,7 +7,7 @@ import { HeroStory } from "./herostory";
 import { HeroSkillContainer } from "./heroskillcontainer";
 import { HeroElements } from "./elements";
 import { useQuery } from "react-apollo-hooks";
-import { IHero, handleError, handleLoading } from "../../views/HeroIndex";
+import { IHero, handleError, IAttributes } from "../../views/HeroIndex";
 
 const HERO_BY_NAME = name => gql`
   query {
@@ -35,36 +35,7 @@ interface IHeroPageProps {
   name: string;
   description: string;
   imgUrl: string;
-  backStory: string;
-  traits: ITraits;
   attributes: IAttributes;
-  lifepowers: ILifepowers;
-  skills: [ISkills];
-}
-
-export interface IAttributes {
-  agility: number;
-  intelligence: number;
-  speed: number;
-  stamina: number;
-  strength: number;
-}
-
-export interface ILifepowers {
-  healthpoints: number;
-  mana: number;
-}
-
-export interface ITraits {
-  resistance: string;
-  weakness: string;
-}
-
-export interface ISkills {
-  name: string;
-  damage: number;
-  element: string;
-  description: string;
 }
 
 interface IPictureProps {
@@ -146,32 +117,31 @@ export const SectionHeading = styled(HeadingTwo)`
   text-align: center;
 `;
 
-// since we are provided with graphql api lets use it as it should be used
-// lets get the information needed only after we need it
-// doesn't really matter in this app, but if it would be a bigger application
-// it migth matter a lot
-
 export const Heropage: React.FC<IHeroPageProps> = props => {
   const rootRef = React.useRef(null);
 
+  // since we are provided with graphql api lets use it as it should be used
+  // lets get the information needed only after we need it
+  // doesn't really matter in this app, but if it would be a bigger application
+  // it migth matter a lot
   const {
     data: { heroByName },
     error,
     loading
   } = useQuery<{ heroByName: IHero }>(HERO_BY_NAME(JSON.stringify(props.name)));
 
-  React.useEffect(
-    () =>
-      window.scrollTo({ top: rootRef.current.offsetTop, behavior: "smooth" }),
-
-    [props]
-  );
+  React.useEffect(() => {
+    // check if ref is not null in case query fetch error happens and it's not declared
+    if (rootRef.current !== null) {
+      window.scrollTo({ top: rootRef.current.offsetTop, behavior: "smooth" });
+    }
+  }, [props]);
 
   if (error) {
     return handleError(error.message);
   }
 
-  // lets give all the information we can from props while loading
+  // lets give all the information we can from props while loading the query
   // and serve rest after query is complete
   if (loading) {
     return (
