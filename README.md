@@ -72,4 +72,7 @@ Develop backend app: `yarn start:server` localhost:4000
 ## Testing
 
 I added some simple cypress E2E tests for the componenets made. I also made a few tests for the querys.
+
 These would have been better to make in the backend but I didn't find a compact testing library for typeorm.
+
+You can run cypress with `yarn cypress open`. You will be prompted with cypress main window where you can choose which spec to run.
